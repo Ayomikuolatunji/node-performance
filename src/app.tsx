@@ -24,16 +24,6 @@ app.get("/timer",(req,res)=>{
     res.send(`it would be delay ${process.pid}`)
 })
 
-
-if(clauster.isPrimary){
-    console.log("master process started");
-    const NUMBER_WORKERS=os.cpus().length
-    for(let i =0; i<NUMBER_WORKERS; i++){
-        clauster.fork()
-    }
-}else{
-    console.log("worker process started");
-    app.listen(8080,()=>{
-        console.log("app running on localhost 8080");
-    })
-}
+app.listen(8080,()=>{
+    console.log("app running on localhost 8080");
+})
