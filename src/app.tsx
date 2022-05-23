@@ -18,7 +18,7 @@ app.get("/",(req,res)=>{
     res.send(`performance ${process.pid}`)
 })
 
-app.get("/good",(req,res)=>{
+app.get("/goods",(req,res)=>{
     res.send(`performance ${process.pid}`)
 })
 
