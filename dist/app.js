@@ -13,6 +13,9 @@ const blockOperation = (duration) => {
 app.get("/", (req, res) => {
     res.send(`performance ${process.pid}`);
 });
+app.get("/good", (req, res) => {
+    res.send(`performance ${process.pid}`);
+});
 app.get("/timer", (req, res) => {
     blockOperation(9000);
     res.send(`it would be delay ${process.pid}`);

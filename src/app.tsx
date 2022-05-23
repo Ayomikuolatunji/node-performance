@@ -1,6 +1,5 @@
 import  express  from "express";
-import clauster from "cluster";
-import os from "os"
+
 
 
 const app=express()
@@ -19,10 +18,15 @@ app.get("/",(req,res)=>{
     res.send(`performance ${process.pid}`)
 })
 
+app.get("/good",(req,res)=>{
+    res.send(`performance ${process.pid}`)
+})
+
 app.get("/timer",(req,res)=>{
      blockOperation(9000)
     res.send(`it would be delay ${process.pid}`)
 })
+
 
 app.listen(8080,()=>{
     console.log("app running on localhost 8080");
