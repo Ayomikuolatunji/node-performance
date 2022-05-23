@@ -1,5 +1,6 @@
 import  express  from "express";
-import clauster from "cluster"
+import clauster from "cluster";
+import os from "os"
 
 
 const app=express()
@@ -20,13 +21,16 @@ app.get("/",(req,res)=>{
 
 app.get("/timer",(req,res)=>{
      blockOperation(9000)
-    res.send("it would be delay")
+    res.send(`it would be delay ${process.pid}`)
 })
 
 
 if(clauster.isPrimary){
     console.log("master process started");
-    clauster.fork()
+    const NUMBER_WORKERS=os.cpus().length
+    for(let i =0; i<NUMBER_WORKERS; i++){
+        clauster.fork()
+    }
 }else{
     console.log("worker process started");
     app.listen(8080,()=>{

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cluster_1 = __importDefault(require("cluster"));
+const os_1 = __importDefault(require("os"));
 const app = (0, express_1.default)();
 const blockOperation = (duration) => {
     const start = Date.now();
@@ -16,11 +17,14 @@ app.get("/", (req, res) => {
 });
 app.get("/timer", (req, res) => {
     blockOperation(9000);
-    res.send("it would be delay");
+    res.send(`it would be delay ${process.pid}`);
 });
 if (cluster_1.default.isPrimary) {
     console.log("master process started");
-    cluster_1.default.fork();
+    const NUMBER_WORKERS = os_1.default.cpus().length;
+    for (let i = 0; i < NUMBER_WORKERS; i++) {
+        cluster_1.default.fork();
+    }
 }
 else {
     console.log("worker process started");
