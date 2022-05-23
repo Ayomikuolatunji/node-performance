@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-const BlockOperation = (duration) => {
+const blockOperation = (duration) => {
     const start = Date.now();
     while (Date.now() - start < duration) {
     }
@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
     res.send("performance");
 });
 app.get("/timer", (req, res) => {
+    blockOperation(9000);
+    res.send("it would be delay");
 });
 app.listen(8080, () => {
     console.log("app running on localhost 8080");

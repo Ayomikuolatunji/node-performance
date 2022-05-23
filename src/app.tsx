@@ -5,10 +5,10 @@ import  express  from "express";
 const app=express()
 
 
-const BlockOperation=(duration)=>{
+const blockOperation=<T extends number>(duration:T)=>{
     const start=Date.now()
     
-   while(Date.now()-start<duration){
+   while(Date.now()-start < duration){
 
    }
 }
@@ -19,7 +19,8 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/timer",(req,res)=>{
-    
+     blockOperation(9000)
+    res.send("it would be delay")
 })
 
 app.listen(8080,()=>{
